@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ls.mybatis.mapper.UserMapper">
+	<sql id="user_id">
+		`id`,
+		`username`,
+		`birthday`,
+		`sex`,
+		`address`
+	</sql>
+
+	<select id="getUserById" parameterType="int"
+		resultType="com.ls.mybatis.pojo.User">
+		<!-- SElECT * FRom USER WHERE id=#{id} -->
+		SELECT
+		`id`,
+		`username`,
+		`birthday`,
+		`sex`,
+		`address`
+		From `user`
+		WHERE
+		id=#{id}
+
+
+
+	</select>
+
+	<select id="getUserByUserName" parameterType="string"
+		resultType="com.ls.mybatis.pojo.User">
+		SELECT
+		`id`,
+		`username`,
+		`birthday`,
+		`sex`,
+		`address`
+		From `user`
+		<!--1. WHERE username like #{name} -->
+		WHERE username like '%${value}%'
+	</select>
+	<!-- useGeneratedKeys=" true" keyProperty="id" 返回自增id -->
+	<insert id="insertUser" parameterType="com.ls.mybatis.pojo.User"
+		useGeneratedKeys=" true" keyProperty="id">
+		INSERT INTO USER
+		(`username`,
+		`birthday`,
+		`sex`,
+		`address`)
+		VALUES (#{username},
+		#{birthday},
+		#{sex},
+		#{address});
+
+	</insert>
+
+
+	
+	
+	
+</mapper>
